@@ -226,6 +226,7 @@ var (
 
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
 		"basic-command": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+			level.Info(logger).Log("msg", "basic-command recieved")
 			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
@@ -554,6 +555,8 @@ func main() {
 	logger = level.NewFilter(logger, level.AllowInfo())
 	logger = log.With(logger, "ts", log.DefaultTimestampUTC, "caller", log.DefaultCaller)
 
+	level.Info(logger).Log("msg", "starting bot")
+
 	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
 		level.Info(logger).Log("msg",fmt.Sprintf("Logged in as: %v#%v", s.State.User.Username, s.State.User.Discriminator))
 	})
@@ -572,7 +575,7 @@ func main() {
 		registeredCommands[i] = cmd
 	}
 
-	level.Info(logger).Log("msg", "starting bot")
+	
 
 	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, os.Interrupt)
@@ -581,14 +584,6 @@ func main() {
 
 	if *RemoveCommands {
 		level.Info(logger).Log("msg", "Removing commands...")
-		// // We need to fetch the commands, since deleting requires the command ID.
-		// // We are doing this from the returned commands on line 375, because using
-		// // this will delete all the commands, which might not be desirable, so we
-		// // are deleting only the commands that we added.
-		// registeredCommands, err := s.ApplicationCommands(s.State.User.ID, *GuildID)
-		// if err != nil {
-		// 	log.Fatalf("Could not fetch registered commands: %v", err)
-		// }
 
 		for _, v := range registeredCommands {
 			err := s.ApplicationCommandDelete(s.State.User.ID, *GuildID, v.ID)
