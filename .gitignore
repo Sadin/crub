@@ -4,6 +4,11 @@
 *.dll
 *.so
 *.dylib
+./build
+build
+./build/crub
+go.mod
+go.sum
 
 # Test binary, built with `go test -c`
 *.test
