@@ -1,5 +1,5 @@
 # crub
-a multi purpose discord bot
+a multi purpose discord bot that I barely work on
 
 # Dependencies
 
