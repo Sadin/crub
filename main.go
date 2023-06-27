@@ -59,45 +59,6 @@ var (
 			Description: "Basic command with files",
 		},
 		{
-			Name:        "localized-command",
-			Description: "Localized command. Description and name may vary depending on the Language setting",
-			NameLocalizations: &map[discordgo.Locale]string{
-				discordgo.ChineseCN: "本地化的命令",
-			},
-			DescriptionLocalizations: &map[discordgo.Locale]string{
-				discordgo.ChineseCN: "这是一个本地化的命令",
-			},
-			Options: []*discordgo.ApplicationCommandOption{
-				{
-					Name:        "localized-option",
-					Description: "Localized option. Description and name may vary depending on the Language setting",
-					NameLocalizations: map[discordgo.Locale]string{
-						discordgo.ChineseCN: "一个本地化的选项",
-					},
-					DescriptionLocalizations: map[discordgo.Locale]string{
-						discordgo.ChineseCN: "这是一个本地化的选项",
-					},
-					Type: discordgo.ApplicationCommandOptionInteger,
-					Choices: []*discordgo.ApplicationCommandOptionChoice{
-						{
-							Name: "First",
-							NameLocalizations: map[discordgo.Locale]string{
-								discordgo.ChineseCN: "一的",
-							},
-							Value: 1,
-						},
-						{
-							Name: "Second",
-							NameLocalizations: map[discordgo.Locale]string{
-								discordgo.ChineseCN: "二的",
-							},
-							Value: 2,
-						},
-					},
-				},
-			},
-		},
-		{
 			Name:        "options",
 			Description: "Command for demonstrating options",
 			Options: []*discordgo.ApplicationCommandOption{
